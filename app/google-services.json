@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "820006662567",
+    "firebase_url": "https://wallpaperstories.firebaseio.com",
+    "project_id": "wallpaperstories",
+    "storage_bucket": "wallpaperstories.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820006662567:android:9e18de7018f29aa0",
+        "android_client_info": {
+          "package_name": "com.company.zeeshan.wallpaperstories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820006662567-eiaq3kcvd1tfhhiq2o2malbd06sasgt7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.zeeshan.wallpaperstories",
+            "certificate_hash": "3ba57474063a3ec69ac407003ace79f210332807"
+          }
+        },
+        {
+          "client_id": "820006662567-35o38pt7ge0cun8gimav0st96ttfmoa5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChTgJ1kDnZDEMUOGCp3C1hY0zdr_qyOkc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820006662567-35o38pt7ge0cun8gimav0st96ttfmoa5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

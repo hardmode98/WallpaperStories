@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Wallpaper Stories</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_main">Library</string>
+    <string name="adsid">ca-app-pub-5098126384084691/7625006763</string>
+    <string name="interstitial">ca-app-pub-5098126384084691/3369603966</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_saved">Saved</string>
+    <string name="title_activity_main_screen">MainScreen</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
