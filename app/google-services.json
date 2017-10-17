@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "820006662567-q4vb3e53hslh2cds7gjdsei7sqv3b58a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.company.zeeshan.wallpaperstories",
+            "certificate_hash": "3d9808ba31f65e6e325969609e7bcde4e0ab6e2e"
+          }
+        },
+        {
           "client_id": "820006662567-35o38pt7ge0cun8gimav0st96ttfmoa5.apps.googleusercontent.com",
           "client_type": 3
         }
