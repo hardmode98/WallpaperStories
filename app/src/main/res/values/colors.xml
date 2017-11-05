@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="color1">#54a7ff</color>
-    <color name="color3">#da3482</color>
-    <color name="color2">#ef4848</color>
-    <color name="white_translucent">#c8ffffff</color>
-    <color name="color4">#ec2876</color>
-    <color name="fakeFabbackground">#29d6e9</color>
-    <color name="titleBackground">#e43333</color>
-    <color name="color5">#636363</color>
+    <color name="colorPrimary">#1e1e1e</color>
+    <color name="colorPrimaryDark">#1e1e1e</color>
 </resources>
