@@ -1,5 +1,6 @@
 package com.company.zeeshan.wallpaperstories.Fragments;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
@@ -58,8 +59,6 @@ public class Gallery extends Fragment {
 
         final RecyclerView.Adapter adapter = new RecyclerView.Adapter<ViewHolder>() {
 
-
-
             @Override
             public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 return new ViewHolder(inflater.inflate(R.layout.wallpaper_holder,parent,false));
@@ -67,8 +66,8 @@ public class Gallery extends Fragment {
 
             @Override
             public void onBindViewHolder(ViewHolder holder, int position) {
-                Picasso.with(getActivity()).load(data.get(holder.getAdapterPosition()))
-                        .resize(300,400).centerCrop().into(holder.imageView);
+                Picasso.with(getActivity()).load(data.get(holder.getAdapterPosition())).fit()
+                        .into(holder.imageView);
 
             }
 

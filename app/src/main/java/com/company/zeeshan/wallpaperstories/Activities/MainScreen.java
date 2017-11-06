@@ -21,6 +21,7 @@ import com.company.zeeshan.wallpaperstories.Fragments.Favorites;
 import com.company.zeeshan.wallpaperstories.Fragments.Gallery;
 import com.company.zeeshan.wallpaperstories.Fragments.Popular;
 import com.company.zeeshan.wallpaperstories.R;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -36,6 +37,8 @@ public class MainScreen extends AppCompatActivity
         Toolbar toolbar =  findViewById(R.id.toolbar);
         toolbar.setTitle("Wallpaper Stories");
         setSupportActionBar(toolbar);
+
+        FirebaseDatabase.getInstance().getReference("Categories").child("1").setValue("s");
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
