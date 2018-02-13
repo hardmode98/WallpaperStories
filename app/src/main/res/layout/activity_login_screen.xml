@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.company.zeeshan.wallpaperstories.Activities.MainScreen">
+    tools:context="com.company.zeeshan.wallpaperstories.Activities.LoginScreen">
 
 
-
-    <include layout="@layout/content_main_screen" />
-
+    <include layout="@layout/content_login_screen" />
 
 
 </android.support.design.widget.CoordinatorLayout>

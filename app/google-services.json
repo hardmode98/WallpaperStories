@@ -57,6 +57,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820006662567:android:ef1c12d91825413f",
+        "android_client_info": {
+          "package_name": "devzee.mywallpaperstoriesadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820006662567-47o4uu4mc3lms8u9ghbhjt43i585fokl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "devzee.mywallpaperstoriesadmin",
+            "certificate_hash": "3ba57474063a3ec69ac407003ace79f210332807"
+          }
+        },
+        {
+          "client_id": "820006662567-35o38pt7ge0cun8gimav0st96ttfmoa5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChTgJ1kDnZDEMUOGCp3C1hY0zdr_qyOkc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820006662567-35o38pt7ge0cun8gimav0st96ttfmoa5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

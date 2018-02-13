@@ -3,54 +3,111 @@ package com.company.zeeshan.wallpaperstories.Activities;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.company.zeeshan.wallpaperstories.Fragments.Community;
 import com.company.zeeshan.wallpaperstories.Fragments.Favorites;
 import com.company.zeeshan.wallpaperstories.Fragments.Gallery;
-import com.company.zeeshan.wallpaperstories.Fragments.Popular;
 import com.company.zeeshan.wallpaperstories.R;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         Favorites.OnFragmentInteractionListener,
-        Popular.OnFragmentInteractionListener
+        Community.OnFragmentInteractionListener
 
         , Gallery.OnFragmentInteractionListener {
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
+
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+            switch (item.getItemId()) {
+                case R.id.community:
+                    Community community = new Community();
+                    transaction.add(R.id.fragment_container, community).commit();
+                    getSupportActionBar().setTitle("Community");
+                    tabLayout.setVisibility(View.GONE);
+                    viewPager.setVisibility(View.GONE);
+
+
+                    return true;
+                case R.id.explore:
+
+                    getSupportActionBar().setTitle("Explore");
+                    tabLayout.setVisibility(View.VISIBLE);
+                    viewPager.setVisibility(View.VISIBLE);
+                    return true;
+
+                case R.id.favorites:
+
+                    Favorites favorites = new Favorites();
+                    transaction.replace(R.id.fragment_container, favorites).commit();
+                    getSupportActionBar().setTitle("Favorites");
+                    tabLayout.setVisibility(View.GONE);
+                    viewPager.setVisibility(View.GONE);
+
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         Toolbar toolbar =  findViewById(R.id.toolbar);
-        toolbar.setTitle("Wallpaper Stories");
+        toolbar.setTitle("Community");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.cardview_dark_background));
         setSupportActionBar(toolbar);
 
-        FirebaseDatabase.getInstance().getReference("Categories").child("1").setValue("s");
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        Community community = new Community();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment_container, community).commit();
+
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+
         viewPager.setAdapter(new Adapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setCurrentItem(1);
+
+        viewPager.setVisibility(View.GONE);
+        tabLayout.setVisibility(View.GONE);
 
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -128,7 +185,7 @@ public class MainScreen extends AppCompatActivity
         public Fragment getItem(int position) {
             switch (position){
                 case 0 :
-                    return new Popular();
+                    return new Community();
                 case 1:
                     return new Gallery();
                 case 2:
@@ -147,11 +204,12 @@ public class MainScreen extends AppCompatActivity
 
             switch (position){
                 case 0 :
-                    return "Popular";
+                    return "Community";
                 case 1:
                     return "Explore";
                 case 2:
                     return "Favorites";
+
             }
             return null;
         }
