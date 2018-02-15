@@ -20,17 +20,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.company.zeeshan.wallpaperstories.Fragments.ArtWallpapers;
 import com.company.zeeshan.wallpaperstories.Fragments.Community;
+import com.company.zeeshan.wallpaperstories.Fragments.DarkWallpapers;
 import com.company.zeeshan.wallpaperstories.Fragments.Favorites;
 import com.company.zeeshan.wallpaperstories.Fragments.Gallery;
+import com.company.zeeshan.wallpaperstories.Fragments.MotivationalWallpapers;
 import com.company.zeeshan.wallpaperstories.R;
 
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         Favorites.OnFragmentInteractionListener,
         Community.OnFragmentInteractionListener
-
-        , Gallery.OnFragmentInteractionListener {
+        , Gallery.OnFragmentInteractionListener,
+        ArtWallpapers.OnFragmentInteractionListener,
+DarkWallpapers.OnFragmentInteractionListener,
+MotivationalWallpapers.OnFragmentInteractionListener{
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -47,6 +52,8 @@ public class MainScreen extends AppCompatActivity
 
             switch (item.getItemId()) {
                 case R.id.community:
+                    findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
+
                     Community community = new Community();
                     transaction.add(R.id.fragment_container, community).commit();
                     getSupportActionBar().setTitle("Community");
@@ -56,13 +63,14 @@ public class MainScreen extends AppCompatActivity
 
                     return true;
                 case R.id.explore:
-
+                    findViewById(R.id.fragment_container).setVisibility(View.GONE);
                     getSupportActionBar().setTitle("Explore");
                     tabLayout.setVisibility(View.VISIBLE);
                     viewPager.setVisibility(View.VISIBLE);
                     return true;
 
                 case R.id.favorites:
+                    findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
 
                     Favorites favorites = new Favorites();
                     transaction.replace(R.id.fragment_container, favorites).commit();
@@ -185,11 +193,11 @@ public class MainScreen extends AppCompatActivity
         public Fragment getItem(int position) {
             switch (position){
                 case 0 :
-                    return new Community();
+                    return new MotivationalWallpapers();
                 case 1:
-                    return new Gallery();
+                    return new DarkWallpapers();
                 case 2:
-                    return new Favorites();
+                    return new ArtWallpapers();
             }
             return null;
         }
@@ -204,11 +212,11 @@ public class MainScreen extends AppCompatActivity
 
             switch (position){
                 case 0 :
-                    return "Community";
+                    return "Motivational";
                 case 1:
-                    return "Explore";
+                    return "Dark";
                 case 2:
-                    return "Favorites";
+                    return "Art";
 
             }
             return null;
