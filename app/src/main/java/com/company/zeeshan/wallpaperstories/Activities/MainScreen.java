@@ -27,6 +27,7 @@ import com.company.zeeshan.wallpaperstories.Fragments.Favorites;
 import com.company.zeeshan.wallpaperstories.Fragments.Gallery;
 import com.company.zeeshan.wallpaperstories.Fragments.MotivationalWallpapers;
 import com.company.zeeshan.wallpaperstories.R;
+import com.google.android.gms.ads.MobileAds;
 
 public class MainScreen extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -94,6 +95,7 @@ MotivationalWallpapers.OnFragmentInteractionListener{
         toolbar.setTitleTextColor(getResources().getColor(R.color.cardview_dark_background));
         setSupportActionBar(toolbar);
 
+        MobileAds.initialize(this, "ca-app-pub-5098126384084691/7145103256");
 
         Community community = new Community();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -180,8 +182,6 @@ MotivationalWallpapers.OnFragmentInteractionListener{
     public void onFragmentInteraction(Uri uri) {
 
     }
-
-
 
     class Adapter extends FragmentStatePagerAdapter{
 

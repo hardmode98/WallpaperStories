@@ -13,6 +13,8 @@
     <string name="title_activity_login_screen">LoginScreen</string>
     <string name="title_activity_image_poster">ImagePoster</string>
     <string name="title_activity_image_details">ImageDetails</string>
+    <string name="admob_id">ca-app-pub-5098126384084691~3197330768</string>
+    <string name="testId">ca-app-pub-3940256099942544/6300978111</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

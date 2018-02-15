@@ -9,12 +9,11 @@
     tools:showIn="@layout/activity_login_screen">
 
     <ImageView
+        android:id="@+id/loginback"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/loginback"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        />
+        android:scaleType="centerCrop" />
 
     <View
         android:layout_width="match_parent"
@@ -55,18 +54,18 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:textSize="17sp"
-        android:fontFamily="sans-serif-condensed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView7"
         android:layout_alignStart="@+id/textView7"
         android:layout_below="@+id/textView7"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="28dp"
-        android:textStyle="bold"
-        android:textColor="@color/cardview_light_background"
+        android:fontFamily="sans-serif-condensed"
         android:text="An elegant community of photographers to share their work and others to enjoy the content. All for a Charitable cause."
-        android:layout_marginRight="30dp" />
+        android:textColor="@color/cardview_light_background"
+        android:textSize="17sp"
+        android:textStyle="bold" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
@@ -84,10 +83,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="13dp"
-        android:textStyle="bold"
         android:fontFamily="sans-serif-condensed"
+        android:text="Background by SPENCER IMBROCK"
         android:textColor="@color/cardview_light_background"
-        android:text="Background by SPENCER IMBROCK" />
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

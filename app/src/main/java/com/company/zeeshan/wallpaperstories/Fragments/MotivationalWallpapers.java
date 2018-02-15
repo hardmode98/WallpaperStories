@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +29,8 @@ import java.util.ArrayList;
 
 public class MotivationalWallpapers extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
     ArrayList<Post> wallpapers;
+    private OnFragmentInteractionListener mListener;
     public MotivationalWallpapers() {
         // Required empty public constructor
     }
@@ -64,8 +63,6 @@ public class MotivationalWallpapers extends Fragment {
         reference.get().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
 
                 Iterable<DataSnapshot> dataSnapshots = dataSnapshot.getChildren();
 
@@ -162,9 +159,9 @@ public class MotivationalWallpapers extends Fragment {
 
      class ViewHolder extends RecyclerView.ViewHolder{
 
+         public TextView name;
         ImageView imageView;
         TextView date;
-        public TextView name;
 
 
         ViewHolder(View itemView) {
