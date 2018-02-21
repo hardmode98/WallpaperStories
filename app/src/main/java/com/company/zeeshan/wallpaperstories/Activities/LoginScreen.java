@@ -52,7 +52,7 @@ public class LoginScreen extends AppCompatActivity {
 
         ImageView loginBack = findViewById(R.id.loginback);
         drawable = getResources().getDrawable(R.drawable.loginback);
-        drawableWeakReference = new WeakReference<Drawable>(drawable);
+        drawableWeakReference = new WeakReference<>(drawable);
         loginBack.setImageDrawable(drawableWeakReference.get());
 
 
@@ -79,9 +79,9 @@ public class LoginScreen extends AppCompatActivity {
             public void onClick(View view) {
 
                 SignInIntent();
+
             }
         });
-
 
     }
 

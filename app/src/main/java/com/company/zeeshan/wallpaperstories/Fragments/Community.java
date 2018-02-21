@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.company.zeeshan.wallpaperstories.Activities.ImageDetails;
+import com.company.zeeshan.wallpaperstories.Activities.DetailActivity;
 import com.company.zeeshan.wallpaperstories.Activities.ImagePoster;
 import com.company.zeeshan.wallpaperstories.Models.Post;
 import com.company.zeeshan.wallpaperstories.Models.UniversalConstants;
@@ -98,7 +98,7 @@ public class Community extends Fragment {
                 holder.imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), ImageDetails.class);
+                        Intent intent = new Intent(getActivity(), DetailActivity.class);
 
                         intent.putExtra(UniversalConstants.IMAGE_DETAILS_URL , data.get(holder.getAdapterPosition()).imageUrl);
                         intent.putExtra(UniversalConstants.POSTED_BY, data.get(holder.getAdapterPosition()).postedBy);
@@ -185,26 +185,6 @@ public class Community extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder{
-
-    ImageView imageView;
-    TextView date;
-    public TextView name;
-
-
-        ViewHolder(View itemView) {
-            super(itemView);
-
-            name = itemView.findViewById(R.id.textView5);
-            date = itemView.findViewById(R.id.textView6);
-            imageView = itemView.findViewById(R.id.postImageView);
-        }
-    }
-
     public void getAllDataAtStart(Iterable<DataSnapshot> iterable){
 
         Log.d("Entered" , "ALL DATA");
@@ -230,6 +210,26 @@ public class Community extends Fragment {
 
                 }
             }
+        }
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView name;
+        ImageView imageView;
+        TextView date;
+
+
+        ViewHolder(View itemView) {
+            super(itemView);
+
+            name = itemView.findViewById(R.id.textView5);
+            date = itemView.findViewById(R.id.textView6);
+            imageView = itemView.findViewById(R.id.postImageView);
         }
     }
 }

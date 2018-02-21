@@ -4,6 +4,7 @@
     package="com.company.zeeshan.wallpaperstories">
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
     <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!-- Include required permissions for Google Mobile Ads to run. -->
@@ -47,12 +48,14 @@
             android:name=".Activities.ImageDetails"
             android:label="@string/title_activity_image_details"
             android:theme="@style/AppTheme.NoActionBarImageDetails" />
-
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
-
+        <activity
+            android:name=".Activities.DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

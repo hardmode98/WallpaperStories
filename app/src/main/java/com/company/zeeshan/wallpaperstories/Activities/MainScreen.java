@@ -26,6 +26,7 @@ import com.company.zeeshan.wallpaperstories.Fragments.DarkWallpapers;
 import com.company.zeeshan.wallpaperstories.Fragments.Favorites;
 import com.company.zeeshan.wallpaperstories.Fragments.Gallery;
 import com.company.zeeshan.wallpaperstories.Fragments.MotivationalWallpapers;
+import com.company.zeeshan.wallpaperstories.Fragments.Profile;
 import com.company.zeeshan.wallpaperstories.R;
 import com.google.android.gms.ads.MobileAds;
 
@@ -35,8 +36,9 @@ public class MainScreen extends AppCompatActivity
         Community.OnFragmentInteractionListener
         , Gallery.OnFragmentInteractionListener,
         ArtWallpapers.OnFragmentInteractionListener,
-DarkWallpapers.OnFragmentInteractionListener,
-MotivationalWallpapers.OnFragmentInteractionListener{
+        DarkWallpapers.OnFragmentInteractionListener,
+        Profile.OnFragmentInteractionListener,
+        MotivationalWallpapers.OnFragmentInteractionListener {
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -53,8 +55,8 @@ MotivationalWallpapers.OnFragmentInteractionListener{
 
             switch (item.getItemId()) {
                 case R.id.community:
-                    findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
 
+                    findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
                     Community community = new Community();
                     transaction.add(R.id.fragment_container, community).commit();
                     getSupportActionBar().setTitle("Community");
@@ -64,6 +66,7 @@ MotivationalWallpapers.OnFragmentInteractionListener{
 
                     return true;
                 case R.id.explore:
+
                     findViewById(R.id.fragment_container).setVisibility(View.GONE);
                     getSupportActionBar().setTitle("Explore");
                     tabLayout.setVisibility(View.VISIBLE);
@@ -71,8 +74,8 @@ MotivationalWallpapers.OnFragmentInteractionListener{
                     return true;
 
                 case R.id.favorites:
-                    findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
 
+                    findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
                     Favorites favorites = new Favorites();
                     transaction.replace(R.id.fragment_container, favorites).commit();
                     getSupportActionBar().setTitle("Favorites");
@@ -80,7 +83,15 @@ MotivationalWallpapers.OnFragmentInteractionListener{
                     viewPager.setVisibility(View.GONE);
 
                     return true;
+                case R.id.profile:
+
+                    Profile profile = new Profile();
+                    transaction.replace(R.id.fragment_container, profile).commit();
+                    getSupportActionBar().setTitle("Profile");
+                    tabLayout.setVisibility(View.GONE);
+                    viewPager.setVisibility(View.GONE);
             }
+
             return false;
         }
 
