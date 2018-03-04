@@ -38,7 +38,8 @@ public class MainScreen extends AppCompatActivity
         ArtWallpapers.OnFragmentInteractionListener,
         DarkWallpapers.OnFragmentInteractionListener,
         Profile.OnFragmentInteractionListener,
-        MotivationalWallpapers.OnFragmentInteractionListener {
+        MotivationalWallpapers.OnFragmentInteractionListener,
+        BlankFragmentTEST.OnFragmentInteractionListener {
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -50,10 +51,12 @@ public class MainScreen extends AppCompatActivity
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-
             switch (item.getItemId()) {
+
                 case R.id.community:
 
                     findViewById(R.id.fragment_container).setVisibility(View.VISIBLE);
@@ -63,8 +66,8 @@ public class MainScreen extends AppCompatActivity
                     tabLayout.setVisibility(View.GONE);
                     viewPager.setVisibility(View.GONE);
 
-
                     return true;
+
                 case R.id.explore:
 
                     findViewById(R.id.fragment_container).setVisibility(View.GONE);
@@ -108,8 +111,8 @@ public class MainScreen extends AppCompatActivity
 
         MobileAds.initialize(this, "ca-app-pub-5098126384084691/7145103256");
 
-        Community community = new Community();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        final Community community = new Community();
+        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_container, community).commit();
 
         tabLayout = findViewById(R.id.tabLayout);
@@ -126,6 +129,7 @@ public class MainScreen extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -173,7 +177,12 @@ public class MainScreen extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            //top 10
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            BlankFragmentTEST blank = new BlankFragmentTEST();
+            transaction.replace(R.id.fragment_container, blank).commit();
+
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -192,6 +201,11 @@ public class MainScreen extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     class Adapter extends FragmentStatePagerAdapter{

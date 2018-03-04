@@ -55,7 +55,7 @@
         <activity
             android:name=".Activities.DetailActivity"
             android:label="@string/title_activity_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBarDetails"></activity>
     </application>
 
 </manifest>

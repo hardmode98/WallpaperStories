@@ -12,15 +12,15 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_below="@id/appBarLayout"
         android:layout_height="match_parent"
-        android:layout_above="@id/cardb"/>
+        android:layout_above="@id/cardb"
+        android:layout_below="@id/appBarLayout" />
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/appBarLayout">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
 
         <android.support.v7.widget.Toolbar
@@ -31,13 +31,13 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/tabLayout"
-            app:tabSelectedTextColor="@color/text"
             app:tabIndicatorColor="@color/text"
-            app:tabTextColor="@color/cardview_dark_background"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/text"
+            app:tabTextColor="@color/cardview_dark_background" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -45,37 +45,37 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
         android:layout_above="@id/cardb"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/appBarLayout" />
 
     <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-
         android:id="@+id/cardb"
-        app:cardCornerRadius="0dp"
+        android:layout_width="match_parent"
+
+        android:layout_height="120dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        app:cardCornerRadius="0dp"
         app:cardElevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="?selectableItemBackground"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackground">
 
             <android.support.design.widget.BottomNavigationView
                 android:id="@+id/bottomNav"
-                app:elevation="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
-                app:itemIconTint="@color/cardview_dark_background"
                 android:layout_alignParentStart="true"
                 android:background="@android:color/white"
+                app:elevation="0dp"
+                app:itemIconTint="@color/cardview_dark_background"
                 app:itemTextColor="@color/cardview_dark_background"
                 app:menu="@menu/bottomnavabar">
 
@@ -96,14 +96,14 @@
 
             <TextView
                 android:id="@+id/textView14"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/imageView6"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="10dp"
                 android:layout_toEndOf="@+id/imageView6"
                 android:layout_toRightOf="@+id/imageView6"
-                android:text="Today's Trending by" />
+                android:text="Picture of the day by" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -111,21 +111,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView14"
                 android:layout_alignBottom="@+id/textView14"
+                android:layout_marginLeft="5dp"
                 android:layout_toEndOf="@+id/textView14"
                 android:layout_toRightOf="@+id/textView14"
                 android:text="Faizan Mir"
-                android:layout_marginLeft="5dp"
                 android:textColor="#1c9acf" />
 
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="7dp"
                 android:layout_alignLeft="@+id/textView14"
                 android:layout_alignStart="@+id/textView14"
                 android:layout_below="@+id/textView13"
-                android:text= "Viewed 29103 times" />
+                android:text="Viewed 29103 times"
+                android:textSize="7dp" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

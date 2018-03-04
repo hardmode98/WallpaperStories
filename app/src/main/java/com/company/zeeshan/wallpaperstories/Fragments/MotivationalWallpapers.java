@@ -50,7 +50,7 @@ public class MotivationalWallpapers extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_motivational_wallpapers, container, false);
 
         final ProgressBar progressBar= v.findViewById(R.id.loading);
-
+        final TextView loading = v.findViewById(R.id.loadingText);
         RecyclerView recyclerView = v.findViewById(R.id.rv_motivational);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity() , 2));
         recyclerView.setHasFixedSize(true);
@@ -71,6 +71,7 @@ public class MotivationalWallpapers extends Fragment {
                     wallpapers.add(d.getValue(Post.class));
                 }
                 adapter.notifyDataSetChanged();
+                loading.setVisibility(View.GONE);
                 progressBar.setVisibility(View.GONE);
 
 
