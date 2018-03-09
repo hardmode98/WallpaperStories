@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/community"
+        android:icon="@drawable/ic_people_black_48dp"
         android:orderInCategory="100"
         android:title="Community"
-        android:icon="@drawable/ic_people_black_48dp"
         app:showAsAction="never" />
     <item
-        android:icon="@drawable/ic_explore_black_48dp"
         android:id="@+id/explore"
+        android:icon="@drawable/ic_explore_black_48dp"
         android:orderInCategory="100"
         android:title="Explore"
         app:showAsAction="never" />
@@ -23,7 +23,7 @@
 
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/account_circle"
+        android:icon="@drawable/arrow_collapse_up"
         android:orderInCategory="100"
         android:title="Favorites"
         app:showAsAction="never" />

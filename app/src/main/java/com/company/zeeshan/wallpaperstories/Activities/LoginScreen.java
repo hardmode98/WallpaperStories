@@ -107,6 +107,8 @@ public class LoginScreen extends AppCompatActivity {
                 Log.d("Error", e.getLocalizedMessage(), e);
 
             }
+        } else {
+            Toast.makeText(getApplicationContext(), "Could not ", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -120,7 +122,13 @@ public class LoginScreen extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+
+                            SharedPreferences.Editor editor = loginPrefs.edit();
+                            editor.putInt(UniversalConstants.LOGGEDIN, 1).apply();
+                            finish();
                             saveValuesToFirebase();
+                            startActivity(new Intent(LoginScreen.this, MainScreen.class));
+
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -145,10 +153,7 @@ public class LoginScreen extends AppCompatActivity {
         db.setValue(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                SharedPreferences.Editor editor = loginPrefs.edit();
-                editor.putInt(UniversalConstants.LOGGEDIN, 1).apply();
-                finish();
-                startActivity(new Intent(LoginScreen.this, MainScreen.class));
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

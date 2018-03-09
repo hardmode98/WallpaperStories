@@ -105,6 +105,7 @@ public class Community extends Fragment {
                         intent.putExtra(UniversalConstants.POSTED_ON, data.get(holder.getAdapterPosition()).postedOn);
                         intent.putExtra(UniversalConstants.POST_ID, data.get(holder.getAdapterPosition()).postid);
                         intent.putExtra(UniversalConstants.POSTTEXT, data.get(holder.getAdapterPosition()).postText);
+                        intent.putExtra("uid", data.get(holder.getAdapterPosition()).uid);
 
                         startActivity(intent);
                     }

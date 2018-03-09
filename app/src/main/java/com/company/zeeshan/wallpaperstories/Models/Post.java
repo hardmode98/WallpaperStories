@@ -12,4 +12,5 @@ public class Post {
    public String postid;
    public String postedOn;
    public String certified;
+    public String uid;
 }

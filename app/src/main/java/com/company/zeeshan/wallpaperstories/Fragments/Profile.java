@@ -1,71 +1,142 @@
 package com.company.zeeshan.wallpaperstories.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.company.zeeshan.wallpaperstories.Activities.DetailActivity;
+import com.company.zeeshan.wallpaperstories.Models.Post;
+import com.company.zeeshan.wallpaperstories.Models.UniversalConstants;
 import com.company.zeeshan.wallpaperstories.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Profile.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Profile#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class Profile extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    int lastPosition;
+    ArrayList<Post> data;
     private OnFragmentInteractionListener mListener;
 
     public Profile() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Profile.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Profile newInstance(String param1, String param2) {
-        Profile fragment = new Profile();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        data = new ArrayList<>();
+
+        RecyclerView recyclerView = view.findViewById(R.id.uploads);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerView.setHasFixedSize(true);
+
+
+        final RecyclerView.Adapter adapter = new RecyclerView.Adapter<ViewHolder>() {
+
+            @Override
+            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                return new ViewHolder(inflater.inflate(R.layout.new_images_holder, parent, false));
+            }
+
+            @Override
+            public void onBindViewHolder(final ViewHolder holder, int position) {
+
+                Animation animation = AnimationUtils.loadAnimation(getActivity(),
+                        (holder.getAdapterPosition() > lastPosition) ? R.anim.up_from_bottom
+                                : R.anim.down_from_top);
+
+                holder.itemView.startAnimation(animation);
+
+                lastPosition = holder.getAdapterPosition();
+
+                holder.name.setText(data.get(holder.getAdapterPosition()).postedBy);
+
+                holder.date.setText(data.get(holder.getAdapterPosition()).postedOn);
+
+                Picasso.with(getActivity()).load(data.get(holder.getAdapterPosition()).imageUrl)
+                        .resize(500, 500).centerInside()
+                        .into(holder.imageView);
+
+                holder.imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), DetailActivity.class);
+
+                        intent.putExtra(UniversalConstants.IMAGE_DETAILS_URL, data.get(holder.getAdapterPosition()).imageUrl);
+                        intent.putExtra(UniversalConstants.POSTED_BY, data.get(holder.getAdapterPosition()).postedBy);
+                        intent.putExtra(UniversalConstants.POSTED_ON, data.get(holder.getAdapterPosition()).postedOn);
+                        intent.putExtra(UniversalConstants.POST_ID, data.get(holder.getAdapterPosition()).postid);
+                        intent.putExtra(UniversalConstants.POSTTEXT, data.get(holder.getAdapterPosition()).postText);
+                        intent.putExtra("uid", data.get(holder.getAdapterPosition()).uid);
+
+                        startActivity(intent);
+                    }
+                });
+
+            }
+
+            @Override
+            public int getItemCount() {
+                return data.size();
+            }
+
+        };
+
+
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("Uploads").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                data.clear();
+
+                Iterable<DataSnapshot> dataSnapshots = dataSnapshot.getChildren();
+                for (DataSnapshot s : dataSnapshots) {
+                    data.add(s.getValue(Post.class));
+                }
+
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        recyclerView.setAdapter(adapter);
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,5 +176,21 @@ public class Profile extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView name;
+        ImageView imageView;
+        TextView date;
+
+
+        ViewHolder(View itemView) {
+            super(itemView);
+
+            name = itemView.findViewById(R.id.textView5);
+            date = itemView.findViewById(R.id.textView6);
+            imageView = itemView.findViewById(R.id.postImageView);
+        }
     }
 }
