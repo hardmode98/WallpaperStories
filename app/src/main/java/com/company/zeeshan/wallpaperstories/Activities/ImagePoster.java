@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.company.zeeshan.wallpaperstories.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -53,17 +54,17 @@ import java.util.Random;
 
 public class ImagePoster extends AppCompatActivity {
 
-    private String mCurrentPhotoPath;
     static final int REQUEST_TAKE_PHOTO = 1;
     static final int REQUEST_GALLERY = 2;
     Bitmap bitmap;
-    private File photoFile;
     FloatingActionButton fab;
     ImageView preview;
     FirebaseStorage storage;
     String uri = "";
     StorageReference storageReference;
     long numberOfPosts;
+    private String mCurrentPhotoPath;
+    private File photoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,13 @@ public class ImagePoster extends AppCompatActivity {
         final EditText text = findViewById(R.id.editText);
 
         CardView cardView = findViewById(R.id.cardView);
+
+        findViewById(R.id.imageView5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         cardView.setOnClickListener(new View.OnClickListener() {
 
@@ -136,25 +144,55 @@ public class ImagePoster extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Calendar calendar = Calendar.getInstance();
+                if (bitmap != null) {
+                    Calendar calendar = Calendar.getInstance();
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-                String date = dateFormat.format(calendar.getTime());
+                    String date = dateFormat.format(calendar.getTime());
 
-                HashMap<String ,String> data = new HashMap<>();
-                data.put("postedOn", date);
-                data.put("postText", text.getText().toString());
-                data.put("postedBy", FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-                data.put("postid", String.valueOf(numberOfPosts));
-                data.put("certified", "no");
-                data.put("imageUrl", uri);
+                    final HashMap<String, Object> data = new HashMap<>();
+                    data.put("postedOn", date);
+                    data.put("postText", text.getText().toString());
+                    data.put("postedBy", FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                    data.put("postid", String.valueOf(numberOfPosts));
+                    data.put("certified", "no");
+                    data.put("imageUrl", uri);
+                    data.put("uid", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                databaseReference.child(String.valueOf(numberOfPosts)).setValue(data);
+                    databaseReference.child(String.valueOf(numberOfPosts)).setValue(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
 
-                Toast.makeText(ImagePoster.this , "Your Photograph has been sent for approval" , Toast.LENGTH_LONG).show();
+                            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child("Uploads").child(String.valueOf(numberOfPosts)).updateChildren(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
 
-                finish();
+                                    Toast.makeText(ImagePoster.this, "Your Photograph has been sent for approval", Toast.LENGTH_LONG).show();
+
+
+                                }
+                            }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+
+                                }
+                            });
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+
+
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please Select an image", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -312,5 +350,6 @@ public class ImagePoster extends AppCompatActivity {
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
+
 
 }

@@ -4,7 +4,6 @@ package com.company.zeeshan.wallpaperstories.Fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -78,47 +77,25 @@ public class Gallery extends Fragment {
         };
 
 
-        new AsyncTask<Void,Void,Void>() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
 
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                data.clear();
+                Iterable<DataSnapshot> dataSnapshotIterator = dataSnapshot.getChildren();
+                for (DataSnapshot DS : dataSnapshotIterator) {
+                    data.add(DS.getValue(String.class));
+                }
+                adapter.notifyDataSetChanged();
 
             }
 
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void onCancelled(DatabaseError databaseError) {
 
-                databaseReference.addValueEventListener(new ValueEventListener() {
-
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        data.clear();
-                        Iterable<DataSnapshot> dataSnapshotIterator = dataSnapshot.getChildren();
-                        for (DataSnapshot DS : dataSnapshotIterator){
-                            data.add(DS.getValue(String.class));
-                        }
-                        adapter.notifyDataSetChanged();
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-                return null;
             }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                getActivity().findViewById(R.id.progressBarMain).setVisibility(View.GONE);
-            }
-
-        }.execute();
+        });
 
         rv_gallery.setAdapter(adapter);
 
