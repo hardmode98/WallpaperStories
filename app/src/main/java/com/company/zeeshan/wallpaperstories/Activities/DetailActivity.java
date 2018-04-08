@@ -40,6 +40,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -71,7 +72,6 @@ public class DetailActivity extends AppCompatActivity {
             final TextView name = findViewById(R.id.textView19);
             final TextView email = findViewById(R.id.textView20);
             final ImageView download = findViewById(R.id.imageView12);
-            download.setVisibility(View.GONE);
 
             // BUNDLE EXTRACTON
             final Bundle bundle = getIntent().getExtras();
@@ -242,17 +242,17 @@ public class DetailActivity extends AppCompatActivity {
                     downLoadingInd.setVisibility(View.VISIBLE);
                     download.setVisibility(View.GONE);
 
-                    if (ContextCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    if (ContextCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             == PackageManager.PERMISSION_GRANTED) {
 
 
-                        Random random = new Random();
+                        final Random random = new Random();
 
                         //GENERATE A FILE WITH RANDOM NAME
 
 
-                        String path = Environment.getExternalStorageDirectory().toString();
-                        final File file = new File(path, random.nextInt() + ".jpg"); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
+                        String iconsStoragePath = Environment.getExternalStorageDirectory() + "/WallpaperStories/Cache";
+                        final File file = new File(iconsStoragePath); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
                         file.mkdirs();
 
                         if (bitmap != null) {
@@ -260,13 +260,16 @@ public class DetailActivity extends AppCompatActivity {
                                 @Override
                                 protected Void doInBackground(Void... voids) {
 
-                                    OutputStream outputStream = null;
+                                    FileOutputStream outputStream = null;
 
                                     try {
-                                        outputStream = new FileOutputStream(file);
-                                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                                        outputStream.flush();
-                                        outputStream.close();
+                                        String filePath = file.toString() + random.nextInt() + ".jpg";
+
+                                        outputStream = new FileOutputStream(filePath);
+                                        BufferedOutputStream bos = new BufferedOutputStream(outputStream);
+                                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+                                        bos.flush();
+                                        bos.close();
                                     } catch (FileNotFoundException e) {
                                         e.printStackTrace();
                                     } catch (IOException e) {
@@ -300,7 +303,7 @@ public class DetailActivity extends AppCompatActivity {
 
                         ActivityCompat.requestPermissions(DetailActivity.this,
 
-                                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
 
                                 1);
 
