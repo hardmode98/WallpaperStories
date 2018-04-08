@@ -106,7 +106,7 @@
                 android:layout_toEndOf="@+id/textView14"
                 android:layout_toRightOf="@+id/textView14"
                 android:text="Faizan Mir"
-                android:textColor="#1c9acf" />
+                android:textColor="#1c9acd" />
 
             <TextView
                 android:id="@+id/textView15"
