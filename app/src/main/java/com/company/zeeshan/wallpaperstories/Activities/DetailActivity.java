@@ -259,7 +259,6 @@ public class DetailActivity extends AppCompatActivity {
                             new AsyncTask<Void, Void, Void>() {
                                 @Override
                                 protected Void doInBackground(Void... voids) {
-
                                     FileOutputStream outputStream = null;
 
                                     try {
