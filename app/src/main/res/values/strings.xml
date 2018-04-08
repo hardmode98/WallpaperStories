@@ -105,4 +105,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="bannerID">ca-app-pub-5098126384084691/7625006763</string>
 </resources>

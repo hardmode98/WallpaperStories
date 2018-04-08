@@ -70,7 +70,7 @@ public class Categories extends Fragment {
 
             @Override
             public int getItemCount() {
-                return 6;
+                return categories.size();
             }
 
         };

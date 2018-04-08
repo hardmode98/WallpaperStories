@@ -133,7 +133,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="13dp"
                 app:adSize="BANNER"
-                app:adUnitId="@string/testId" />
+                app:adUnitId="@string/bannerID" />
 
 
         </RelativeLayout>

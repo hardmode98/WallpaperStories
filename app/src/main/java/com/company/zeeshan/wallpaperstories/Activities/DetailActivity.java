@@ -127,7 +127,7 @@ public class DetailActivity extends AppCompatActivity {
 
             // LOAD AD
             mInterstitialAd = new InterstitialAd(this);
-            mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+            mInterstitialAd.setAdUnitId("ca-app-pub-5098126384084691/3369603966");
             mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
             final AdView mAdView = findViewById(R.id.adView);
@@ -259,7 +259,6 @@ public class DetailActivity extends AppCompatActivity {
                             new AsyncTask<Void, Void, Void>() {
                                 @Override
                                 protected Void doInBackground(Void... voids) {
-
                                     FileOutputStream outputStream = null;
 
                                     try {

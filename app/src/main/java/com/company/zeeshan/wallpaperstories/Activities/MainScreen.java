@@ -103,7 +103,7 @@ public class MainScreen extends AppCompatActivity
         toolbar.setTitleTextColor(getResources().getColor(R.color.cardview_dark_background));
         setSupportActionBar(toolbar);
 
-        MobileAds.initialize(this, "ca-app-pub-5098126384084691/7145103256");
+        MobileAds.initialize(this, "ca-app-pub-5098126384084691~3197330768");
 
         final Community community = new Community();
         final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
