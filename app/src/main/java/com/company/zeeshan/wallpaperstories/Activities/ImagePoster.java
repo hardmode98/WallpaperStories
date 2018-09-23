@@ -267,7 +267,7 @@ public class ImagePoster extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                                    uri = task.getResult().getDownloadUrl().toString();
+                                    uri = String.valueOf(task.getResult().getUploadSessionUri());
 
                                     Picasso.with(ImagePoster.this).load(uri).resize(500, 500).centerCrop().into(preview);
 

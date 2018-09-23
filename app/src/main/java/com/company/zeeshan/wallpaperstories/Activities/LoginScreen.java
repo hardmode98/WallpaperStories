@@ -68,7 +68,7 @@ public class LoginScreen extends AppCompatActivity {
 
         //initiate Google Sign in
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getResources().getString(R.string.webserverid)).requestEmail().build();
+                .requestIdToken(getString(R.string.webserverid)).requestEmail().build();
 
         apiClient = GoogleSignIn.getClient(this , options);
 

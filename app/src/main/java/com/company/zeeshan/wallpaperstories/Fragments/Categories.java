@@ -65,6 +65,14 @@ public class Categories extends Fragment {
 
                     Picasso.with(getActivity()).load(categories.get(holder.getAdapterPosition()).categoryImage).resize(400, 400).into(holder.imageView);
                     holder.textView.setText(categories.get(holder.getAdapterPosition()).name);
+
+                    holder.imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
                 }
             }
 
